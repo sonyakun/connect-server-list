@@ -6,9 +6,8 @@ import { ofetch } from "ofetch";
 const data = ref({});
 const protocols = ref(['tcp', 'udp']);
 
-// データを非同期で取得
 const fetchData = async () => {
-  data.value = await ofetch('https://api.zpw.jp/connect/serverlist.php');
+  data.value = await ofetch('https://zsc-proxy.sonyaumg.workers.dev/connect/serverlist.php');
 };
 
 fetchData();
@@ -57,6 +56,10 @@ data.value = {
                 </option>
               </select>
             </div>
+            <div class="ml-auto flex flex-col text-xs">
+              <p>※更新されない場合は5分後に再度試してください。</p>
+              <p class="text-blue-400 hover:text-blue-500"><a rel="noopener noreferer" target="_blank" href="https://github.com/sonyakun/connect-server-list">ソースコードはこちら</a></p>
+            </div>
           </div>
           <div v-if="data.data && data.data.length">
             <div class="flex flex-col gap-2">
@@ -70,7 +73,7 @@ data.value = {
       </div>
     </template>
     <template #fallback>
-      <div>Loading...</div>
+      <div>読み込んでいます...</div>
     </template>
   </Suspense>
 </template>
